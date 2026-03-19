@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Borrow Requests</title>
+</head>
+<body>
+<h1>Pending Borrow Requests</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Request ID</th>
+        <th>User</th>
+        <th>Book Title</th>
+        <th>Category</th>
+        <th>Requested At</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(requests)}">
+        <td colspan="6">No pending requests found.</td>
+    </tr>
+    <tr th:each="request : ${requests}">
+        <td th:text="${request.id}">1</td>
+        <td th:text="${request.user.username}">username</td>
+        <td th:text="${request.book.title}">Book title</td>
+        <td th:text="${request.book.category}">Category</td>
+        <td th:text="${#temporals.format(request.requestDate, 'yyyy-MM-dd HH:mm')}">2026-01-01 10:00</td>
+        <td>
+            <form th:action="@{/borrow/approve/{id}(id=${request.id})}" method="post" style="display: inline;">
+                <button type="submit">Approve</button>
+            </form>
+            <form th:action="@{/borrow/reject/{id}(id=${request.id})}" method="post" style="display: inline;">
+                <button type="submit">Reject</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<p><a th:href="@{/books}">Back to Books</a></p>
+</body>
+</html>
