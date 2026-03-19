@@ -29,10 +29,18 @@ GitHub Actions workflow is defined in:
 Stages:
 
 1. Build + tests (`mvn clean verify`)
-2. SAST with Semgrep (`p/java` and `p/owasp-top-ten`)
-3. Dependency scan with OWASP Dependency-Check
+2. Documentation check (threat model + assignment files) and evidence artifact upload
+3. SAST with Semgrep (`p/java` and `p/owasp-top-ten`)
+4. Dependency scan with OWASP Dependency-Check
 
 The pipeline runs on every push, pull request, and manual trigger.
+
+## Project Structure
+
+- `src/` - Spring Boot application source
+- `docs/assignment/` - assignment brief and module reference material
+- `docs/threat-model/` - formal STRIDE threat model files
+- `docs/evidence/screenshots/` - SAST/DAST and implementation evidence screenshots
 
 ## Security Notes
 

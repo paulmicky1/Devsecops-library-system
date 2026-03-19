@@ -29,10 +29,30 @@ jobs:
       - name: Build and run tests
         run: mvn -B clean verify
 
+  documentation-check:
+    name: Documentation and Threat Model Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Verify required security documentation exists
+        run: |
+          test -f "docs/threat-model/Mini-Library-STRIDE-Threat-Model.tm7"
+          test -f "docs/assignment/Final-Project-Description.pdf"
+
+      - name: Upload threat model and evidence as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-documentation
+          path: |
+            docs/threat-model/**
+            docs/evidence/**
+
   sast-semgrep:
     name: SAST (Semgrep)
     runs-on: ubuntu-latest
-    needs: build-and-test
+    needs: [build-and-test, documentation-check]
     container:
       image: semgrep/semgrep
     steps:
@@ -45,7 +65,7 @@ jobs:
   dependency-scan:
     name: Dependency Scan (OWASP)
     runs-on: ubuntu-latest
-    needs: build-and-test
+    needs: [build-and-test, documentation-check]
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
