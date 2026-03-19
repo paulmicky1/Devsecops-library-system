@@ -5,6 +5,8 @@
 
 *.log
 *.tmp
+*.session.data
+*.session.lck
 
 .env
 .env.*

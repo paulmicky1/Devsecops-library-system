@@ -40,6 +40,9 @@ jobs:
         run: |
           test -f "docs/threat-model/Mini-Library-STRIDE-Threat-Model.tm7"
           test -f "docs/assignment/Final-Project-Description.pdf"
+          test -f "docs/evidence/dast/zap/session/SecureLibrary_Vulnerability_Scan.session"
+          test -f "docs/evidence/dast/zap/session/SecureLibrary_Vulnerability_Scan.session.script"
+          test -f "docs/evidence/dast/zap/session/SecureLibrary_Vulnerability_Scan.session.properties"
 
       - name: Upload threat model and evidence as artifacts
         uses: actions/upload-artifact@v4

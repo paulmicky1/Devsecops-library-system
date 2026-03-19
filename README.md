@@ -40,7 +40,8 @@ The pipeline runs on every push, pull request, and manual trigger.
 - `src/` - Spring Boot application source
 - `docs/assignment/` - assignment brief and module reference material
 - `docs/threat-model/` - formal STRIDE threat model files
-- `docs/evidence/screenshots/` - SAST/DAST and implementation evidence screenshots
+- `docs/evidence/screenshots/` - implementation and scan screenshots
+- `docs/evidence/dast/zap/session/` - OWASP ZAP session artifacts
 
 ## Security Notes
 
